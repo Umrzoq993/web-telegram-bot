@@ -60,7 +60,22 @@ const App = () => {
   };
 
   const onSendData = useCallback(() => {
-    telegram.sendData(JSON.stringify(cartItems));
+    const queryID = telegram.initDataUnsafe.query_id;
+
+    if (!queryID) {
+      telegram.sendData(JSON.stringify(cartItems));
+    } else {
+      fetch("http://localhost:8000/web-data", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          queryID,
+          data: cartItems,
+        }),
+      });
+    }
   }, [cartItems]);
 
   useEffect(() => {
