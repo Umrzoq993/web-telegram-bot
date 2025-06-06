@@ -15,6 +15,15 @@ const App = () => {
     telegram.ready();
   });
 
+  useEffect(() => {
+    if (cartItems.length === 0) {
+      telegram.MainButton.hide();
+    } else {
+      telegram.MainButton.text = "To'lovni amalga oshirish";
+      telegram.MainButton.show();
+    }
+  }, [cartItems]);
+
   const onAddItem = (item) => {
     const existItem = cartItems.find((c) => c.id === item.id);
 
