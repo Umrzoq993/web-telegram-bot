@@ -65,7 +65,7 @@ const App = () => {
     if (!queryID) {
       telegram.sendData(JSON.stringify(cartItems));
     } else {
-      fetch("http://localhost:8000/web-data", {
+      fetch("https://telegram-web-bot-69c43616778f.herokuapp.com/web-data", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
